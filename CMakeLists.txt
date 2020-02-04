@@ -13,15 +13,22 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   trac_ik_lib
   kdl_parser
+  moveit_resources
+  moveit_core
+
 )
+
+LIST( APPEND CMAKE_MODULE_PATH "$ENV{HOME}/cmake" )
 find_package(ompl REQUIRED)
 find_package(Eigen3 REQUIRED)
-
+find_package(Boost COMPONENTS program_options REQUIRED system)
+find_package(fcl REQUIRED)
 catkin_package(
   CATKIN_DEPENDS
     roscpp
     trac_ik_lib
     kdl_parser
+    moveit_core
 #  INCLUDE_DIRS include
 #  LIBRARIES stefan_planning
 #  CATKIN_DEPENDS roscpp rospy std_msgs trac-ik-lib
@@ -35,6 +42,8 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${OMPL_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
+  ${moveit_resources_INCLUDE_DIRS}
+
 )
 
 ## Declare a C++ library
@@ -46,4 +55,6 @@ add_executable(stefan_planning src/planning.cpp)
 target_link_libraries(stefan_planning
   ${catkin_LIBRARIES}
   ${OMPL_LIBRARIES}
+  ${Boost_LIBRARIES}
+  fcl
 )
