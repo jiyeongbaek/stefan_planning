@@ -46,14 +46,10 @@
 #include <Eigen/Geometry>
 #include <Eigen/Dense>
 #include <cmath>
-#include <stefan_planning/validitycheck.h>
-
-namespace ob = ompl::base;
-namespace og = ompl::geometric;
+#include <stefan_planning/planning_setup.h>
 
 using namespace std;
 using namespace Eigen;
-
 
 
 int main(int argc, char **argv)
@@ -63,5 +59,8 @@ int main(int argc, char **argv)
 
     planning_setup planner(nh);
     planner.plan();
+
+    std::cout << "***********************************************" << std::endl;
+    // planner.planSimple();
     return 0;
 }

@@ -15,7 +15,9 @@ find_package(catkin REQUIRED COMPONENTS
   kdl_parser
   moveit_resources
   moveit_core
-
+  tf
+  moveit_ros_planning
+  moveit_ros_planning_interface
 )
 
 LIST( APPEND CMAKE_MODULE_PATH "$ENV{HOME}/cmake" )
@@ -29,6 +31,9 @@ catkin_package(
     trac_ik_lib
     kdl_parser
     moveit_core
+    tf
+    moveit_ros_planning
+    moveit_ros_planning_interface
 #  INCLUDE_DIRS include
 #  LIBRARIES stefan_planning
 #  CATKIN_DEPENDS roscpp rospy std_msgs trac-ik-lib
@@ -58,3 +63,16 @@ target_link_libraries(stefan_planning
   ${Boost_LIBRARIES}
   fcl
 )
+
+add_executable(tf_listener src/tf_listener.cpp)
+target_link_libraries(tf_listener
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+)
+
+
+# add_executable(tf_broadcaster src/tf_broadcaster.cpp)
+# target_link_libraries(tf_broadcaster
+#   ${catkin_LIBRARIES}
+#   ${Boost_LIBRARIES}
+# )
