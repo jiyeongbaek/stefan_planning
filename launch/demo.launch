@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find franka_description)/robots/panda_arm_hand.urdf.xacro'" />
+  <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find franka_description)/robots/panda_arm_hand.urdf.xacro'" /> -->
   <node name="stefan_planning" pkg="stefan_planning" type="stefan_planning" output="screen" >
-    <param name="urdf_param" value="/robot_description"/> 
+    <!-- <param name="urdf_param" value="/robot_description"/>  -->
   </node>
 
 </launch>

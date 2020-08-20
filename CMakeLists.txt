@@ -13,7 +13,6 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   trac_ik_lib
   kdl_parser
-  moveit_resources
   moveit_core
   tf
   moveit_ros_planning
@@ -21,6 +20,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 LIST( APPEND CMAKE_MODULE_PATH "$ENV{HOME}/cmake" )
+
+find_package(PCL 1.8 REQUIRED)
 find_package(ompl REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(Boost COMPONENTS program_options REQUIRED system)
@@ -48,9 +49,11 @@ include_directories(
   ${OMPL_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
   ${moveit_resources_INCLUDE_DIRS}
-
+  ${PCL_INCLUDE_DIRS}
 )
 
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/stefan_planning.cpp
@@ -61,7 +64,9 @@ target_link_libraries(stefan_planning
   ${catkin_LIBRARIES}
   ${OMPL_LIBRARIES}
   ${Boost_LIBRARIES}
+  ${PCL_LIBRARIES}
   fcl
+  
 )
 
 add_executable(tf_listener src/tf_listener.cpp)
